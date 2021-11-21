@@ -1,14 +1,8 @@
 # ndkports
 
-A collection of Android build scripts for various third-party libraries and the
-tooling to build them.
-
-If you're an Android app developer looking to *consume* these libraries, this is
-probably not what you want. This project builds AARs to be published to Maven.
-You most likely want to use the AAR, not build it yourself.
-
-Note: Gradle support for consuming these artifacts from an AAR is a work in
-progress.
+A fork of [Google's ndkPorts](https://android.googlesource.com/platform/tools/ndkports/) 
+building **static** builds of Android common ndk tools.
+Currently only OpenSSL is supported.
 
 ## Ports
 
@@ -33,11 +27,7 @@ ndkports requires an NDK to be used for building to be specified on the command
 line as well as a list of packages to build. For example, to build cURL:
 
 ```bash
-$ ./gradlew run --args='--ndk /path/to/android-ndk-r20 openssl curl'
-Build output...
-$ find  -name '*.aar'
-./out/curl/curl.aar
-./out/openssl/openssl.aar
+$ ./gradlew :openssl publish -PndkPath=/path/to/ndk
 ```
 
 Note that dependencies currently need to be already built or ordered explicitly.
