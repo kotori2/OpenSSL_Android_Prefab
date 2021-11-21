@@ -45,8 +45,9 @@ val buildTask = tasks.register<AdHocPortTask>("buildPort") {
                 "-D__ANDROID_API__=${toolchain.api}",
                 "--prefix=${installDirectory.absolutePath}",
                 "--openssldir=${installDirectory.absolutePath}",
-                "no-sctp",
-                "shared"
+                "-static",
+                "--static",
+                "no-sctp"
             )
 
             env("ANDROID_NDK", toolchain.ndk.path.absolutePath)
@@ -73,8 +74,12 @@ tasks.prefabPackage {
     version.set(prefabVersion)
 
     modules {
-        create("crypto")
-        create("ssl")
+        create("crypto") {
+            static.set(true)
+        }
+        create("ssl") {
+            static.set(true)
+        }
     }
 }
 
@@ -148,7 +153,7 @@ publishing {
             from(components["prefab"])
             pom {
                 name.set("OpenSSL")
-                description.set("The ndkports AAR for OpenSSL.")
+                description.set("The static AAR for OpenSSL.")
                 url.set(
                     "https://android.googlesource.com/platform/tools/ndkports"
                 )
@@ -161,12 +166,12 @@ publishing {
                 }
                 developers {
                     developer {
-                        name.set("The Android Open Source Project")
+                        name.set("Kotori2")
                     }
                 }
                 scm {
-                    url.set("https://android.googlesource.com/platform/tools/ndkports")
-                    connection.set("scm:git:https://android.googlesource.com/platform/tools/ndkports")
+                    url.set("https://github.com/kotori2/OpenSSL_Android_Prefab")
+                    connection.set("scm:git:https://github.com/kotori2/OpenSSL_Android_Prefab")
                 }
             }
         }
