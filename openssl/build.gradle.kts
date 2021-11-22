@@ -22,7 +22,7 @@ fun openSslVersionToCMakeVersion(openSslVersion: String): CMakeCompatibleVersion
 val portVersion = "1.1.1l"
 val prefabVersion = openSslVersionToCMakeVersion(portVersion)
 
-group = "com.android.ndk.thirdparty"
+group = "mk.0x.ndk"
 version = "$portVersion${rootProject.extra.get("snapshotSuffix")}"
 
 plugins {
